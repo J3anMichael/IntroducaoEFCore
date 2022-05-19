@@ -10,10 +10,12 @@ namespace IntroducaoEFCore.Data
 {
     public class ApplicationContext : DbContext
     {
+         
+
         public DbSet<Pedido> Pedidos { get; set; } 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data source=(localdb)\\mssqllocaldb;Initial Catalog=IntroducaoEFCore;Integrated Security=true");
+            optionsBuilder.UseSqlServer("Server = JEANMICHAEL; Database = Teste; Trusted_Connection = True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,7 +63,7 @@ namespace IntroducaoEFCore.Data
                 {
                     p.ToTable("PedidoItens");
                     p.HasKey(p => p.Id);
-                    p.Property(p => p.Quantidade).HasDefaultValueSql().IsRequired();
+                    Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder<int> propertyBuilder = p.Property(p => p.Quantidade).IsRequired();
                     p.Property(p => p.Valor).IsRequired();
                     p.Property(p => p.Desconto).IsRequired();
                 });   
