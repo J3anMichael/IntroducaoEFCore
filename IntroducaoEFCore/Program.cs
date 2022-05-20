@@ -1,2 +1,24 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+
+namespace IntroducaoEFCore
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using var db = new Data.ApplicationContext();
+
+            //db.Database.Migrate();
+            var existe = db.Database.GetPendingMigrations().Any();
+            if (existe)
+            {
+                // 
+            }
+
+            Console.WriteLine("Hello, World.");
+
+
+        }
+    }
+}
