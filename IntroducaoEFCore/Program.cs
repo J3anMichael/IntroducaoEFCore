@@ -19,8 +19,20 @@ namespace IntroducaoEFCore
             }
 
             //InserirDados();
-            InserirDadosEmMassa();
+            //InserirDadosEmMassa();
 
+        }
+
+        private static void ConsultarDados()
+        {
+            using var db = new Data.ApplicationContext();
+            var consultaPorSintaxe = (from c in db.clientes where c.Id > 0 select c).ToList();
+            var consultaPorMetodo = db.clientes.Where(p => p.Id > 0).ToList();
+            foreach(var cliente in consultaPorMetodo)
+            {
+                Console.WriteLine($"Consultado Cliente: {cliente.Id}");
+                db.clientes.Find(cliente.Id);
+            }
         }
 
         private static void InserirDadosEmMassa()
@@ -43,11 +55,11 @@ namespace IntroducaoEFCore
                 Telefone = "41992119200"
             };
 
-            using var db = new Data.ApplicationContext();
-            db.AddRange(produto, cliente);
+            //using var db = new Data.ApplicationContext();
+            //db.AddRange(produto, cliente);
 
-            var registros = db.SaveChanges();
-            Console.WriteLine($"Total Registro(s): {registros}");
+            //var registros = db.SaveChanges();
+            //Console.WriteLine($"Total Registro(s): {registros}");
 
         }
 
@@ -62,14 +74,14 @@ namespace IntroducaoEFCore
                 Ativo = true
             };
 
-            using var db = new Data.ApplicationContext();
-            //db.Produtos.Add(produto);
-            //db.Set<Produto>().Add(produto);
-            //db.Entry(produto).State = EntityState.Added;
-            db.Add(produto);
+            //using var db = new Data.ApplicationContext();
+            ////db.Produtos.Add(produto);
+            ////db.Set<Produto>().Add(produto);
+            ////db.Entry(produto).State = EntityState.Added;
+            //db.Add(produto);
 
-            var registros = db.SaveChanges();
-            Console.WriteLine($"Total registro(s): {registros}");
+            //var registros = db.SaveChanges();
+            //Console.WriteLine($"Total registro(s): {registros}");
         }
     }
 }
